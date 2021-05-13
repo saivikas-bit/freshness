@@ -2,7 +2,9 @@ import { Box, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import ProductCard from './ProductCard';
 
-function SectionHeadline() {
+function SectionHeadline(props) {
+	const { products } = props;
+
 	return (
 		<Box padding="2rem 4rem">
 			<Grid container spacing={1} justify="space-evenly">
@@ -11,54 +13,19 @@ function SectionHeadline() {
 						Section Headline
 					</Typography>
 				</Grid>
-				<Grid item lg={3}>
-					<ProductCard
-						product={{
-							name: 'product1',
-							description: 'this is product a',
-							image:
-								'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-							price: '80₹',
-						}}
-						width="90%"
-					/>
-				</Grid>
-				<Grid item lg={3}>
-					<ProductCard
-						product={{
-							name: 'product1',
-							description: 'this is product a',
-							image:
-								'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-							price: '80₹',
-						}}
-						width="90%"
-					/>
-				</Grid>
-				<Grid item lg={3}>
-					<ProductCard
-						product={{
-							name: 'product1',
-							description: 'this is product a',
-							image:
-								'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-							price: '80₹',
-						}}
-						width="90%"
-					/>
-				</Grid>
-				<Grid item lg={3}>
-					<ProductCard
-						product={{
-							name: 'product1',
-							description: 'this is product a',
-							image:
-								'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-							price: '80₹',
-						}}
-						width="90%"
-					/>
-				</Grid>
+				{products.map((product) => (
+					<Grid item lg={3}>
+						<ProductCard
+							product={{
+								name: product.name,
+								description: product.description,
+								image: product.image,
+								price: product.price,
+							}}
+							width="90%"
+						/>
+					</Grid>
+				))}
 			</Grid>
 		</Box>
 	);
