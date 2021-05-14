@@ -13,19 +13,12 @@ function SectionHeadline(props) {
 						Section Headline
 					</Typography>
 				</Grid>
-				{products.map((product) => (
-					<Grid item lg={3}>
-						<ProductCard
-							product={{
-								name: product.name,
-								description: product.description,
-								image: product.image,
-								price: product.price,
-							}}
-							width="90%"
-						/>
-					</Grid>
-				))}
+				{products &&
+					products.map((product, i) => (
+						<Grid item lg={3} key={i}>
+							<ProductCard product={product} width="90%" />
+						</Grid>
+					))}
 			</Grid>
 		</Box>
 	);

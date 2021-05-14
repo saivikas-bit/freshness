@@ -1,18 +1,46 @@
+import { useState } from 'react';
+
+import { useDispatch } from 'react-redux';
 import {
 	Button,
 	CardActions,
 	CardContent,
 	CardMedia,
 	Paper,
+	Snackbar,
 	Typography,
 } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { addCart } from '../../Store/cart-slice';
 
 function ProductCard(props) {
 	let { product } = props;
 	let { width } = props;
 
+	const [state, setstate] = useState(false);
+
+	const dispatch = useDispatch();
+
+	const addCarts = () => {
+		dispatch(addCart(product));
+		setstate(true);
+	};
+	const handleClose = () => {
+		setstate(false);
+	};
+
 	return (
 		<div style={{ width: width }}>
+			<Snackbar
+				open={state}
+				autoHideDuration={3000}
+				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+				onClose={handleClose}
+			>
+				<MuiAlert variant="filled" severity="success" on>
+					item is added to the cart
+				</MuiAlert>
+			</Snackbar>
 			<Paper
 				variant="outlined"
 				style={{
@@ -41,6 +69,7 @@ function ProductCard(props) {
 						size="large"
 						disableElevation
 						style={{ borderRadius: '10px' }}
+						onClick={addCarts}
 					>
 						Buy now
 					</Button>

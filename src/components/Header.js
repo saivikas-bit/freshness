@@ -11,12 +11,18 @@ import {
 import {
 	PersonOutline,
 	Search,
-	ShoppingBasketOutlined,
 	ShoppingCartOutlined,
 } from '@material-ui/icons';
-import React from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useCart } from '../Store/cart-slice';
 
 function Header() {
+	const cartData = useSelector(useCart);
+	let number = cartData.length;
+
+	useEffect(() => {}, [cartData]);
+
 	return (
 		<>
 			<Box
@@ -96,7 +102,7 @@ function Header() {
 						<PersonOutline />
 					</IconButton>
 					<IconButton>
-						<Badge badgeContent={2} color="secondary">
+						<Badge badgeContent={number} color="secondary">
 							<ShoppingCartOutlined />
 						</Badge>
 					</IconButton>

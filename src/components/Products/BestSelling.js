@@ -14,17 +14,9 @@ function BestSelling(props) {
 				</Grid>
 				<Grid item lg={8} container>
 					{products &&
-						products.map((product) => (
-							<Grid item lg={4}>
-								<ProductCard
-									product={{
-										name: product.name,
-										description: product.description,
-										image: product.image,
-										price: product.price,
-									}}
-									width="90%"
-								/>
+						products.map((product, key) => (
+							<Grid item lg={4} key={key}>
+								<ProductCard product={product} width="90%" />
 							</Grid>
 						))}
 				</Grid>

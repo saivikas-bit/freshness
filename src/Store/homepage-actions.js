@@ -14,6 +14,7 @@ export const fetchData = () => {
 			return data.results.map(
 				(product) =>
 					new Product({
+						id: product['id'],
 						name: product['alt_description'],
 						image: product['urls']['small'],
 						description: product['description'],
@@ -24,39 +25,26 @@ export const fetchData = () => {
 			);
 		};
 
-		const bestSelling = await axios.get('/search/photos', {
-			params: {
-				query: 'food',
-				client_id: clientId,
-				page: 1,
-				orientation: 'landscape',
-				per_page: 3,
-			},
-		});
+		const productData = async ({ page, per_page }) =>
+			await axios.get('/search/photos', {
+				params: {
+					query: 'food',
+					client_id: clientId,
+					page,
+					orientation: 'landscape',
+					per_page,
+				},
+			});
+
+		const bestSelling = await productData({ page: 1, per_page: 3 });
 
 		dispatch(addBestSelling(traformedData(bestSelling)));
 
-		const farmerSelling = await axios.get('/search/photos', {
-			params: {
-				query: 'food',
-				client_id: clientId,
-				page: 2,
-				orientation: 'landscape',
-				per_page: 3,
-			},
-		});
+		const farmerSelling = await productData({ page: 2, per_page: 3 });
 
 		dispatch(addFarmerProducts(traformedData(farmerSelling)));
 
-		let headlines = await axios.get('/search/photos', {
-			params: {
-				query: 'food',
-				client_id: clientId,
-				page: 3,
-				orientation: 'landscape',
-				per_page: 4,
-			},
-		});
+		let headlines = await productData({ page: 3, per_page: 4 });
 
 		dispatch(addSectionHeadline(traformedData(headlines)));
 	};
